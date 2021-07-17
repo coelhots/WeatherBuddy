@@ -18,4 +18,4 @@ In the project directory, you can run:
 
 #### `npm start`
 
-![enter image description here](https://www.xxx.com)
+![enter image description here](https://)
