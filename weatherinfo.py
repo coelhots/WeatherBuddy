@@ -10,7 +10,11 @@ def index():
     city_name = request.args.get('city')
     r = requests.get('http://api.openweathermap.org/data/2.5/weather?q='+city_name+'&appid='+API_KEY)
     json_object = r.json()
+    if r.status_code!= 200:
+        return json_object
+
     temp_k = float(json_object['main']['temp'])
+    
     temp_c = int(temp_k - 273.15)
     name = (json_object['name'])
     country = (json_object['sys']['country'])
