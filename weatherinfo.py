@@ -1,7 +1,12 @@
 import requests
 from flask import Flask, request, json
+from flask_cors import CORS
+
 
 app = Flask(__name__)
+CORS(app)
+
+
 app.config['DEBUG'] = True
 API_KEY = '3b82fc89586f7c60405de9352a0c84eb'
 
@@ -10,8 +15,8 @@ def index():
     city_name = request.args.get('city')
     r = requests.get('http://api.openweathermap.org/data/2.5/weather?q='+city_name+'&appid='+API_KEY)
     json_object = r.json()
-    if r.status_code!= 200:
-        return json_object
+    if r.status_code != 200:
+        return json_object, 404
 
     temp_k = float(json_object['main']['temp'])
     
