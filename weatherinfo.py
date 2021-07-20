@@ -1,10 +1,15 @@
+from typing import Iterator
 import requests
+import requests_cache
 from flask import Flask, request, json
 from flask_cors import CORS
 
 
 app = Flask(__name__)
 CORS(app)
+
+
+requests_cache.install_cache('openweather_cache', backend='sqlite', expire_after=300)
 
 
 app.config['DEBUG'] = True
@@ -22,6 +27,7 @@ def index():
     
     temp_c = int(temp_k - 273.15)
     name = (json_object['name'])
+    icon_url = ('http://openweathermap.org/img/wn/'+json_object['weather'][0]['icon']+'.png')
     country = (json_object['sys']['country'])
     temp_desc = (json_object['weather'][0]['description'])
 
@@ -30,6 +36,7 @@ def index():
         "temp_desc": temp_desc,
         "city" : name,
         "country" : country,
+        "icon_url": icon_url,
         }
         
     return json.dumps(response)
