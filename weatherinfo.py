@@ -19,21 +19,26 @@ API_KEY = '3b82fc89586f7c60405de9352a0c84eb'
 
 @app.route('/weather', methods=['GET', 'POST'])
 def index():
+
     max = request.args.get('max')
+
     if max:
         cities_list = {}
         i = 0
         city_cache = requests_cache.patcher.get_cache()
         cities = city_cache.values(True)
+
         while True:
             try:
                 cities_list[i]=next(cities).json()
                 i += 1
                 if i > int(max) -1:
-                    break        
+                    break  
+
             except StopIteration as e:
                 return json.dumps(cities_list)
 
+            
         return json.dumps(cities_list)
 
     city_name = request.args.get('city')

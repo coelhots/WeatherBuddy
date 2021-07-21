@@ -61,9 +61,10 @@ Runs the app in the development mode.
 ### Endpoints
 
 #### To cached cities
-Open http://localhost:5000/weather?max="number"  to get all the cached cities, up to the latest n entries (configurable) or max_number (if specified).
+Open http://localhost:5000/weather?max="number"  to get all the cached cities data, up to the latest n entries (configurable) or max_number (if specified).
 
-Exemple: http://localhost:5000/weather?max=3
+Exemple: http://localhost:5000/weather?max=2
+
 ```yaml
 {
   "0": {
@@ -153,50 +154,6 @@ Exemple: http://localhost:5000/weather?max=3
       "speed": 7.72
     }
   },
-  "2": {
-    "base": "stations",
-    "clouds": {
-      "all": 0
-    },
-    "cod": 200,
-    "coord": {
-      "lat": -27.6146,
-      "lon": -48.5012
-    },
-    "dt": 1626881497,
-    "id": 6323121,
-    "main": {
-      "feels_like": 291.31,
-      "humidity": 56,
-      "pressure": 1023,
-      "temp": 291.92,
-      "temp_max": 295.6,
-      "temp_min": 290.72
-    },
-    "name": "Florianópolis",
-    "sys": {
-      "country": "BR",
-      "id": 2000085,
-      "sunrise": 1626861663,
-      "sunset": 1626899965,
-      "type": 2
-    },
-    "timezone": -10800,
-    "visibility": 10000,
-    "weather": [
-      {
-        "description": "clear sky",
-        "icon": "01d",
-        "id": 800,
-        "main": "Clear"
-      }
-    ],
-    "wind": {
-      "deg": 0,
-      "speed": 0
-    }
-  }
-}
 ```
 
 
