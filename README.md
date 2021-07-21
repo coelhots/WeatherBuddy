@@ -60,6 +60,26 @@ Runs the app in the development mode.
 
 ### Endpoints
 
+
+#### To get cache data for the specified city
+
+
+Open http://localhost:5000/weather?city="city_name" to get the cache data for the specified city_name, otherwise fetches from the Open Weather API, caches and returns the results.
+
+Exemple: http://localhost:5000/weather?city=Florianopolis
+
+```yaml
+  {
+  "city": "Florianópolis",
+  "country": "BR",
+  "icon_url": "http://openweathermap.org/img/wn/01d.png",
+  "temp_c": 17,
+  "temp_desc": "clear sky"
+  }
+  ```
+
+
+
 #### To cached cities
 Open http://localhost:5000/weather?max="number"  to get all the cached cities data, up to the latest n entries (configurable) or max_number (if specified).
 
@@ -155,22 +175,3 @@ Exemple: http://localhost:5000/weather?max=2
     }
   },
 ```
-
-
-
-#### To get cache data for the specified city
-
-
-Open http://localhost:5000/weather?city="city_name" to get the cache data for the specified city_name, otherwise fetches from the Open Weather API, caches and returns the results.
-
-Exemple: http://localhost:5000/weather?city=Florianopolis
-
-```yaml
-  {
-  "city": "Florianópolis",
-  "country": "BR",
-  "icon_url": "http://openweathermap.org/img/wn/01d.png",
-  "temp_c": 17,
-  "temp_desc": "clear sky"
-  }
-  ```
