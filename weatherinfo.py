@@ -9,14 +9,33 @@ app = Flask(__name__)
 CORS(app)
 
 
-requests_cache.install_cache('openweather_cache', backend='sqlite', expire_after=300)
+requests_cache.install_cache('openweather_cache', backend='sqlite', expire_after=300, allowable_methods=('GET', 'POST'))
 
 
 app.config['DEBUG'] = True
 API_KEY = '3b82fc89586f7c60405de9352a0c84eb'
 
+
+
 @app.route('/weather', methods=['GET', 'POST'])
 def index():
+    max = request.args.get('max')
+    if max:
+        cities_list = {}
+        i = 0
+        city_cache = requests_cache.patcher.get_cache()
+        cities = city_cache.values(True)
+        while True:
+            try:
+                cities_list[i]=next(cities).json()
+                i += 1
+                if i > int(max) -1:
+                    break        
+            except StopIteration as e:
+                return json.dumps(cities_list)
+
+        return json.dumps(cities_list)
+
     city_name = request.args.get('city')
     r = requests.get('http://api.openweathermap.org/data/2.5/weather?q='+city_name+'&appid='+API_KEY)
     json_object = r.json()
@@ -40,6 +59,8 @@ def index():
         }
         
     return json.dumps(response)
+
+
 
 if __name__ == '__main__':
     app.run(debug=True)
